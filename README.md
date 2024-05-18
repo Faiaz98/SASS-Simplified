@@ -48,3 +48,123 @@ body {
   font-family: $font-stack;
 ```
 
+**Nesting**
+
+Sass allows you to nest your CSS selectors in a way that follows the same visual hierarchy of your HTML.
+
+```scss
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { 
+    display: inline-block; 
+  }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}  
+```
+
+**Partials and Imports**
+
+You can create partial Sass files that contain little snippets of CSS. These partials are then imported into a main stylesheet.
+
+- Create a partial:
+
+```scss
+// _colors.scss
+$primary-color: #333;
+$secondary-color: #555;
+```
+
+- Import the partial:
+
+```scss
+// main.scss
+@import 'colors';
+
+body {
+  color: $primary-color;
+}
+```
+
+
+**Mixins**
+
+Mixins allow you to create reusable chunks of code.
+
+```scss
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+     -ms-border-radius: $radius;
+         border-radius: $radius;
+}
+
+.box {
+  @include border-radius(10px);
+}
+```
+
+**Inheritance**
+
+Inheritance in Sass allows you to share a set of CSS properties from one selector to another.
+
+```scss
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #3333;
+}
+
+.message {
+  @extend %message-shared;
+}
+
+.success {
+  @extend %message-shared;
+  border-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  border-color: red;
+}
+```
+
+**Operators**
+
+Sass has a handful of standard math operators like +, -, *, and / for doing math.
+
+```scss
+.container {
+  width: 100% / 3;
+}
+
+.sidebar {
+  width: 300px - 50px;
+}
+```
+
+## 4. Advanced Concepts
+
+**Functions**
+
+Sass functions allow you to define complex operations you can use throughout your stylesheets.
+
+```scss
+@function prx-to-rem($px, $base-font-size: 16) {
+  @return $px / $base-font-size * 1rem;
+}
+
+body {
+  font-size: px-to-rem(16);
+}
+```
