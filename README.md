@@ -168,3 +168,134 @@ body {
   font-size: px-to-rem(16);
 }
 ```
+
+## Additional Topics
+
+**1. Advanced Functions**
+
+Function in Sass can be quite powerful and extend beyond simple arithmetic. Cover how to create more complex functions and use built-in functions.
+
+```scss
+@function calculate-grid-width($columns, $gutter-width) {
+  @return ($columns * 100% / 12) - ($gutter-width * (12 - 1) / 12);
+}
+
+.grid-item {
+  width: calculate-grid-width(4, 20px);
+}
+```
+
+## 2. Color Functions
+
+Sass provides several built-in functions to manipulate colors. These include functions for adjusting lightness, saturation, and more.
+
+```scss
+$base-color: #036;
+
+.button {
+  background-color: lighten($base-color, 20%);
+  border-color: darken($base-color, 20%);
+}
+```
+
+## 3. Control Directive & Expressions
+
+Use control directives like `@if`, `@for`, `@each`, and `@while` to add logic to your stylesheets.
+
+```scss
+@for $i from 1 through 3 {
+  .col-#{$i} {
+    width: 100% / 3 * $i;
+  }
+}
+
+$themes: (light, dark, colorful);
+
+@each @theme in @themes {
+  .theme-#{$theme} {
+    @if $theme == light {
+      background: white;
+    } @else if @theme == dark {
+      background: black;
+    } @else {
+      background: blue;
+    }
+  }
+}
+```
+
+## 4. @error, @warm, and @debug Directives
+
+These directives are useful for debugging and validating your Sass code.
+
+```scss
+@mixin validate-color($color) {
+  @if not (type-of($color) == 'color') {
+    @error "#{$color) is not a valid color value.";
+  }
+}
+
+@include validate-color(#333); // Valid
+@include validate-color("333"); // Error
+```
+
+## 5. Placeholder Selectors
+
+Placeholder selectors(denoted by `%`) are used for inheritance but do not output CSS directly unless extended.
+
+```scss
+%buttn-styles {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.button {
+  @extend %button-styles;
+  background-color: blue;
+  color: white;
+}
+
+.alert {
+  @extend %button-styles;
+  background-color: red;
+  color: white;
+}
+```
+
+## 6. @use and @forward Rules
+
+The `@use` rule is a newer way to include Sass files and is more powerful `@import`. It helps avoid issues with global scope.
+
+- @use:
+
+```scss
+// _buttons.scss
+$button-padding: 10px;
+@mixin button {
+  padding: $button-padding;
+}
+
+// main.scss
+@use 'buttons';
+
+.btn {
+  @include buttons.button;
+}
+```
+
+- @forward:
+
+```scss
+// _colors.scss
+$primary-color: #333;
+$secondary-color: #555;
+
+@forward *;
+
+// _index.scss
+@use 'colors';
+
+body {
+  color: colors.$primary-color;
+}
+```
