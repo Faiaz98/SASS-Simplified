@@ -14,7 +14,7 @@ Sass is a preprocessor scripting language that is interpreted or compiled into C
 - Nesting: Nest CSS selectors in a way that follows the same visual hierarchy of your HTML.
 - Partials and Import: Split your CSS into smaller, reusable pieces.
 - Mixins: Create reusable chunks of code.
-- Inhertiance: Share a set of CSS properties from one selector to another.
+- Inheritance: Share a set of CSS properties from one selector to another.
 - Operators: Perform calculations to set CSS property values.
 
 
@@ -27,6 +27,24 @@ Sass is a preprocessor scripting language that is interpreted or compiled into C
 ```bash
 npm install -g sass
 ```
+- Via Ruby and gem:
 
+```bash
+gem install sass
+```
 
+## 3. Basic Concepts
+
+**Variables**
+
+Variables in Sass start with a dollar sign(`$`). They allow you to store information that you reuse throughout your stylesheets.
+
+```scss
+$primary-color: #333;
+$font-stack: Helvetica, sans-serif;
+
+body {
+  color: $primary-color;
+  font-family: $font-stack;
+```
 
